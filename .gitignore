@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+*.log
+*.tgz
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+.DS_Store
