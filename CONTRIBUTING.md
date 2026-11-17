@@ -34,3 +34,11 @@ GitHub Actions runs untrusted pull-request code with **read-only** repository pe
 - A future release requires an explicit maintainer decision, passing CI, the `npm run audit:release` allowlist, a reviewed package tarball preview, and a changelog entry.
 - Treat exported API, validation behavior, and unit semantics as compatibility contracts; document breaking changes and select a suitable version.
 - Never turn on automatic publishing, install scripts, network access, analytics, or equipment integration without a separate security review.
+
+## Optional Windows auto-sync for genuine public changes
+
+- The maintainer may run `node scripts/auto-sync.mjs` from a **per-user** Windows Scheduled Task on the explicitly authorized development laptop. A clean worktree produces no commit or GitHub activity.
+- The script restricts the path, machine, `main` branch, exact public `origin`, and eight pre-approved package/docs files. It validates the full public release allowlist and runs `npm run check` before any commit and non-forced push.
+- Changes to CI, permissions, release tooling, security policy, dependency manifest, unknown/new files, unexpected Git states, or remote divergence require manual review; the task must not bypass these checks.
+- Results and blockers are logged locally at `%LOCALAPPDATA%\\ConcreteFlowOSS\\sync-events.jsonl`. This log is not included in the GitHub repository or the npm package.
+- This updates only the independent OSS repository while the laptop is running and authenticated; it does **not** publish the parent commercial ERP, write artificial activity, deploy software, or release to npm. Disable the `ConcreteFlowOSS-Sync` Scheduled Task to stop local monitoring.

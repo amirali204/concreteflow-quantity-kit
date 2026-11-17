@@ -10,7 +10,8 @@ const allowed = new Set([
   "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "README.md", "README.fa.md",
   "SECURITY.md", "package.json",
   "src/index.mjs", "src/index.d.ts",
-  "test/index.test.mjs", "examples/basic.mjs", "scripts/release-audit.mjs"
+  "test/index.test.mjs", "examples/basic.mjs", "scripts/release-audit.mjs",
+  "scripts/auto-sync.mjs"
 ]);
 const secrets = [
   /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/i,
