@@ -8,6 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const allowed = new Set([
   ".gitattributes", ".gitignore", ".github/workflows/checks.yml",
   "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "README.md", "README.fa.md",
+  "ROADMAP.md",
   "SECURITY.md", "package.json",
   "src/index.mjs", "src/index.d.ts",
   "test/index.test.mjs", "examples/basic.mjs", "scripts/release-audit.mjs",

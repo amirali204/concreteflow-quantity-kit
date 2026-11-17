@@ -55,7 +55,7 @@ npm pack --dry-run --json
 
 ## Contributing, vulnerability reports and roadmap
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [CHANGELOG.md](CHANGELOG.md). Potential enhancements include additional exact-decimal operations, formal input schemas, and consumer compatibility tests; no feature is promised.
+See [ROADMAP.md](ROADMAP.md) for a transparent, non-binding plan, [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute, [SECURITY.md](SECURITY.md) for responsible reporting, and [CHANGELOG.md](CHANGELOG.md) for actual changes. Roadmap entries are proposals until independently implemented and verified.
 
 ## Licensing and boundary
 
