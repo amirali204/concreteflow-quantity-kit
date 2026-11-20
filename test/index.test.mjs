@@ -88,6 +88,25 @@ test("material count must be 1..256", () => {
   assert.throws(() => calculateBatchQuantities({ ...blank, materials: null }));
 });
 
+test("accept exactly 256 materials with stable order and exact quantities", () => {
+  const materials = Array.from({ length: 256 }, (_, index) => ({
+    id: `material-${index + 1}`,
+    ratePerM3: `0.${String(index + 1).padStart(3, "0")}`,
+    unit: index % 2 === 0 ? "kg/m3" : "L/m3"
+  }));
+  const result = calculateBatchQuantities({ volumeM3: "0.1", materials });
+  assert.equal(result.materials.length, 256);
+  assert.deepEqual(result.materials.map(({ id }) => id), materials.map(({ id }) => id));
+  assert.deepEqual(
+    [result.materials[0].total, result.materials[255].total],
+    ["0.0001", "0.0256"]
+  );
+  assert.deepEqual(
+    [result.materials[0].totalUnit, result.materials[255].totalUnit],
+    ["kg", "L"]
+  );
+});
+
 test("unique material IDs ignore ASCII case", () => {
   assert.throws(() => calculateBatchQuantities({
     volumeM3: "1",
@@ -104,6 +123,22 @@ test("IDs must be bounded ASCII and not paths", () => {
       volumeM3: "1", materials: [{ id, ratePerM3: "1", unit: "kg/m3" }]
     }));
   }
+});
+
+test("accept a 64-character material ID but reject 65 characters", () => {
+  const id = "A" + "b".repeat(63);
+  const result = calculateBatchQuantities({
+    volumeM3: "1",
+    materials: [{ id, ratePerM3: "2", unit: "kg/m3" }]
+  });
+  assert.equal(result.materials[0].id, id);
+  assert.throws(
+    () => calculateBatchQuantities({
+      volumeM3: "1",
+      materials: [{ id: id + "c", ratePerM3: "2", unit: "kg/m3" }]
+    }),
+    /material id/
+  );
 });
 
 test("reject extra line fields or inherited required fields", () => {
